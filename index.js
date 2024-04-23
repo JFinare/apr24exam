@@ -61,6 +61,10 @@ export function wordFrequency(text) {
 
 //console.log(wordFrequency("   This    is a   test   "))
 
+
+
+
+
 // Task: Top N Frequent Words
 // Write a function `topNFrequentWords(text, n)` that finds the top `n` most frequent words in a given text.
 // The function should return an array of tuples where each tuple contains a word and its frequency,
@@ -70,9 +74,52 @@ export function wordFrequency(text) {
 // - Text is case-insensitive.
 // - Words are separated by spaces, and the text may contain punctuation.
 // - Ignore punctuation, and consider only alphabetic characters for word separation.
-export function topNFrequentWords(text, n) {
+function topNFrequentWords(text, n) {
+    const brokenDown=text.toLowerCase().replaceAll(/[,.'":?!]/g,"").split(" ");
+    let extraTrimmed=[]
+    for(let i=0;i<brokenDown.length;i++){
+        if(brokenDown[i]!==""){
+            extraTrimmed.push(brokenDown[i])
+        }
+    }
+    extraTrimmed=extraTrimmed.sort()
+    console.log(extraTrimmed);
+    const counted=[];
+    for(let i=0;i<extraTrimmed.length;i++){
+        let doesExist = counted.findIndex(existing => existing[0]===extraTrimmed[i]);
+        if (doesExist===-1){
+            counted.push([extraTrimmed[i],1])
+        }else{
+            counted[doesExist][1]++;
+        }
+        
+    }
+    
+    counted.sort((a,b)=>b[1]-a[1])
+    console.log(counted)
+    counted.sort((a,b)=>{
+        if (a[0]<b[0]){
+            return -1;
+        }
+        if (a[0]>b[0])
+        return 1;
+    })
 
-
-
+    /*
+    const orderByValue=[]
+    counted.sort((a,b)=>{
+        if (a.counted[1]<b.counted[1]){
+         return -1;
+     }
+      if (a.counted[1]>b.counted[1]){
+         return 1;
+     }
+     })
+     console.log(counted)
+     */
+    const theResults=counted.slice(0,n)
+return theResults;
 
 }
+
+//topNFrequentWords("Unique word in the text.",1)
