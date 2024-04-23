@@ -10,13 +10,14 @@ export function reverseWords(sentence) {
     const trimmedArr=trimmed.split(" ");
     const splitArr=[];
     let resultArray=[];
-    let j=splitArr.length-1;
 
     for(let i=0;i<trimmedArr.length;i++){
         if(trimmedArr[i]!==""){
             splitArr.push(trimmedArr[i])
         }
     }
+    let j=splitArr.length-1;
+
     for(let i=0;i<splitArr.length;i++){
         resultArray.push(splitArr[j])
         j--;
@@ -26,7 +27,6 @@ export function reverseWords(sentence) {
     return resultSentence;
 
 }
-
 
 // Task: Word Frequency Counter
 // Given a string of text, write a function `wordFrequency` that counts the
@@ -46,7 +46,6 @@ export function wordFrequency(text) {
             extraTrimmed.push(brokenDown[i])
         }
     }
-    console.log(extraTrimmed)
     const theResults={};
     for (let i=0; i<extraTrimmed.length;i++){
         let theWord=extraTrimmed[i];
@@ -74,7 +73,7 @@ export function wordFrequency(text) {
 // - Text is case-insensitive.
 // - Words are separated by spaces, and the text may contain punctuation.
 // - Ignore punctuation, and consider only alphabetic characters for word separation.
-function topNFrequentWords(text, n) {
+export function topNFrequentWords(text, n) {
     const brokenDown=text.toLowerCase().replaceAll(/[,.'":?!]/g,"").split(" ");
     let extraTrimmed=[]
     for(let i=0;i<brokenDown.length;i++){
@@ -83,7 +82,6 @@ function topNFrequentWords(text, n) {
         }
     }
     extraTrimmed=extraTrimmed.sort()
-    console.log(extraTrimmed);
     const counted=[];
     for(let i=0;i<extraTrimmed.length;i++){
         let doesExist = counted.findIndex(existing => existing[0]===extraTrimmed[i]);
@@ -96,13 +94,13 @@ function topNFrequentWords(text, n) {
     }
     
     counted.sort((a,b)=>b[1]-a[1])
-    console.log(counted)
     counted.sort((a,b)=>{
+        if(a[1]===b[1]){
         if (a[0]<b[0]){
             return -1;
         }
         if (a[0]>b[0])
-        return 1;
+        return 1;}
     })
 
     /*
@@ -118,8 +116,7 @@ function topNFrequentWords(text, n) {
      console.log(counted)
      */
     const theResults=counted.slice(0,n)
-return theResults;
+return theResults
 
 }
 
-//topNFrequentWords("Unique word in the text.",1)
